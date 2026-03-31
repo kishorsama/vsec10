@@ -18,5 +18,11 @@ pipeline {
                 sh 'docker build -t your-dockerhub-username/ai-model-api:latest .'
             }
         }
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh 'kubectl apply -f deployment.yaml'
+                sh 'kubectl apply -f service.yaml'
+            }
+        }
     }
 }
