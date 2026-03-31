@@ -14,8 +14,8 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                sh 'pip install -r requirements.txt'
-                sh 'python -m unittest discover' 
+                sh 'pip install --break-system-packages -r requirements.txt'
+        sh 'python3 -m unittest discover'
             }
         }
 
