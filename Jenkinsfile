@@ -6,6 +6,18 @@ pipeline {
     }
 
     stages {
+        stage('Docker Push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', 
+                                usernameVariable: 'DOCKER_USER', 
+                                passwordVariable: 'DOCKER_PASS')]) {
+                    
+                    sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}"
+                    sh "docker push ${DOCKER_IMAGE}"
+                }
+            }
+        }
+
         stage('Checkout') {
             steps {
                 checkout scm [cite: 34]
